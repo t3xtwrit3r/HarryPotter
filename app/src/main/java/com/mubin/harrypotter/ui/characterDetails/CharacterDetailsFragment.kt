@@ -1,4 +1,4 @@
-package com.mubin.harrypotter.ui
+package com.mubin.harrypotter.ui.characterDetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mubin.harrypotter.R
-
+import dagger.hilt.android.AndroidEntryPoint
 class CharacterDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

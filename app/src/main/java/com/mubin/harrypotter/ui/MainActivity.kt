@@ -12,8 +12,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.mubin.harrypotter.R
 import com.mubin.harrypotter.broadcastReceiver.ConnectionStatus
 import com.mubin.harrypotter.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() , ConnectionStatus.ConnectivityReceiverListener {
 
     private lateinit var binding: ActivityMainBinding

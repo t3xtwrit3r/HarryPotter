@@ -4,6 +4,7 @@ package com.mubin.harrypotter.api.models
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
 
+@Keep
 class CharacterDetailsResponse : ArrayList<CharacterDetailsResponse.CharacterDetailsResponseItem>(){
     @Keep
     data class CharacterDetailsResponseItem(

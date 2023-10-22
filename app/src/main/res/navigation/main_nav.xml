@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/characterListFragment"
-        android:name="com.mubin.harrypotter.ui.CharacterListFragment"
+        android:name="com.mubin.harrypotter.ui.characterList.CharacterListFragment"
         android:label="fragment_character_list"
         tools:layout="@layout/fragment_character_list" />
 
     <fragment
         android:id="@+id/characterDetailsFragment"
-        android:name="com.mubin.harrypotter.ui.CharacterDetailsFragment"
+        android:name="com.mubin.harrypotter.ui.characterDetails.CharacterDetailsFragment"
         android:label="fragment_character_details"
         tools:layout="@layout/fragment_character_details" >
         <action
