@@ -6,27 +6,71 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mubin.harrypotter.R
+import com.mubin.harrypotter.databinding.FragmentCharacterListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CharacterListFragment : Fragment() {
 
+    private lateinit var binding: FragmentCharacterListBinding
     private val characterListViewModel: CharacterListViewModel by viewModels()
+    private lateinit var characterListAdapter: CharacterListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_character_list, container, false)
+        binding = FragmentCharacterListBinding.inflate(layoutInflater).apply {
+            viewModel = characterListViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        characterListViewModel.getCharacters()
+        initViews()
+        setupObserver()
 
+    }
+
+    private fun initViews() {
+        characterListAdapter = CharacterListAdapter()
+        with(binding.characterListRv) {
+            isNestedScrollingEnabled = false
+            setHasFixedSize(false)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = characterListAdapter
+        }
+
+        characterListAdapter.characterItemClicked = { characterId ->
+            findNavController().navigate(CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailsFragment(characterId))
+        }
+    }
+
+    private fun setupObserver() {
+        characterListViewModel.apply {
+
+            getCharacters()
+
+            characterList.observe(viewLifecycleOwner) { dataList ->
+
+                if (!dataList.isNullOrEmpty()) {
+
+                    if (this@CharacterListFragment::characterListAdapter.isInitialized) {
+                        characterListAdapter.addAll(dataList)
+                    }
+
+                }
+
+            }
+
+        }
     }
 
 }

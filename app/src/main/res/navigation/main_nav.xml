@@ -9,16 +9,17 @@
         android:id="@+id/characterListFragment"
         android:name="com.mubin.harrypotter.ui.characterList.CharacterListFragment"
         android:label="fragment_character_list"
-        tools:layout="@layout/fragment_character_list" />
+        tools:layout="@layout/fragment_character_list" >
+        <action
+            android:id="@+id/action_characterListFragment_to_characterDetailsFragment"
+            app:destination="@id/characterDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/characterDetailsFragment"
         android:name="com.mubin.harrypotter.ui.characterDetails.CharacterDetailsFragment"
         android:label="fragment_character_details"
         tools:layout="@layout/fragment_character_details" >
-        <action
-            android:id="@+id/action_characterDetailsFragment_to_characterListFragment"
-            app:destination="@id/characterListFragment" />
         <argument
             android:name="characterId"
             app:argType="string"

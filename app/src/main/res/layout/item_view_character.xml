@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <View
+        android:id="@+id/viewSupporter"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/characterIv" />
+
+    <View
+        android:id="@+id/viewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_character_item"
+        android:paddingBottom="10dp"
+        app:layout_constraintTop_toTopOf="@id/characterNameTv"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/characterIv"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/characterNameTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:text="@{tvShow.name}"
+        android:includeFontPadding="false"
+        android:paddingTop="8dp"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/characterIv"
+        app:layout_constraintTop_toTopOf="@+id/characterIv" />
+
+    <TextView
+        android:id="@+id/characterActorNameTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/ubuntu_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/ColorTextOther"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/characterNameTv"
+        app:layout_constraintStart_toStartOf="@id/characterNameTv"
+        app:layout_constraintTop_toBottomOf="@id/characterNameTv" />
+
+    <TextView
+        android:id="@+id/houseNameTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/ubuntu_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/ColorTextSecondary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/characterNameTv"
+        app:layout_constraintStart_toStartOf="@id/characterNameTv"
+        app:layout_constraintTop_toBottomOf="@id/characterActorNameTv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

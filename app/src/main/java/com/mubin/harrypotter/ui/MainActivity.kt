@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() , ConnectionStatus.ConnectivityReceiver
                 .setAction(getString(R.string.turn_on_wifi)) {
                     startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
                 }
-                .setActionTextColor(resources.getColor(R.color.white))
+                .setActionTextColor(resources.getColor(R.color.colorTextIcons))
             mSnackBar?.show()
         } else {
             mSnackBar?.dismiss()
