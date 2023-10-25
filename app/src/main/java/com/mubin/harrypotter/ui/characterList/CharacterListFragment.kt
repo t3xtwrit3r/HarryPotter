@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mubin.harrypotter.R
 import com.mubin.harrypotter.databinding.FragmentCharacterListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +24,7 @@ class CharacterListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentCharacterListBinding.inflate(layoutInflater).apply {
+        binding = FragmentCharacterListBinding.inflate(layoutInflater, container, false).apply {
             viewModel = characterListViewModel
             lifecycleOwner = viewLifecycleOwner
         }
@@ -36,6 +36,7 @@ class CharacterListFragment : Fragment() {
 
         initViews()
         setupObserver()
+        setOnClick()
 
     }
 
@@ -45,6 +46,7 @@ class CharacterListFragment : Fragment() {
             isNestedScrollingEnabled = false
             setHasFixedSize(false)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            itemAnimator = DefaultItemAnimator()
             adapter = characterListAdapter
         }
 
@@ -70,6 +72,12 @@ class CharacterListFragment : Fragment() {
 
             }
 
+        }
+    }
+
+    private fun setOnClick() {
+        binding.refreshButton.setOnClickListener {
+            characterListViewModel.getCharacters()
         }
     }
 

@@ -7,5 +7,6 @@ class AppRepository
 @Inject
 constructor(private val apiService: ApiService) {
     suspend fun getCharacters()  = apiService.getCharacters()
+    suspend fun getCharacterDetails(id: String)  = apiService.getCharacterDetails(id)
 
 }

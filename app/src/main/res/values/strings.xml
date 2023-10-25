@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="alert_no_internet">No internet connection!</string>
     <string name="turn_on_wifi">Turn Wifi on!</string>
+    <string name="no_data_found_please_try_again_later">No data found !\nPlease try again later</string>
+    <string name="refresh">Refresh</string>
 </resources>

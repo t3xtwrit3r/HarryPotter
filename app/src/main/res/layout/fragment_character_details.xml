@@ -1,14 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.characterDetails.CharacterDetailsFragment">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="com.mubin.harrypotter.ui.characterDetails.CharacterDetailsViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/colorPrimary"
+        tools:context=".ui.characterDetails.CharacterDetailsFragment">
 
-</FrameLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:paddingBottom="40dp"
+                android:visibility="@{(viewModel.characterDetails != null &amp;&amp; viewModel.isLoading() == false) ? View.VISIBLE : View.GONE}">
+
+                <View
+                    android:id="@+id/viewSupporter"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/characterIv" />
+
+                <View
+                    android:id="@+id/viewBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_character_item"
+                    android:paddingBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/characterNameTv" />
+
+                <ImageView
+                    android:id="@+id/characterIv"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:imageUrl="@{viewModel.characterDetails.image}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/characterNameTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:includeFontPadding="false"
+                    android:paddingTop="8dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp"
+                    android:text='@{viewModel.characterDetails.hogwartsStudent ? String.valueOf(viewModel.characterDetails.name).concat(" (Student)") : viewModel.characterDetails.hogwartsStaff ? String.valueOf(viewModel.characterDetails.name).concat(" (Staff)") : String.valueOf(viewModel.characterDetails.name)}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/characterIv"
+                    app:layout_constraintTop_toTopOf="@+id/characterIv" />
+
+                <TextView
+                    android:id="@+id/characterActorNameTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/ColorTextOther"
+                    android:textSize="12sp"
+                    android:visibility="@{String.valueOf(viewModel.characterDetails.actor).length() == 0 ? View.GONE : View.VISIBLE}"
+                    android:text="@{String.valueOf(viewModel.characterDetails.actor).toUpperCase()}"
+                    app:layout_constraintEnd_toEndOf="@id/characterNameTv"
+                    app:layout_constraintStart_toStartOf="@id/characterNameTv"
+                    app:layout_constraintTop_toBottomOf="@id/characterNameTv" />
+
+                <TextView
+                    android:id="@+id/houseNameTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/ColorThemeExtra"
+                    android:textSize="12sp"
+                    android:visibility="@{String.valueOf(viewModel.characterDetails.house).length() == 0 ? View.GONE : View.VISIBLE}"
+                    android:text="@{String.valueOf(viewModel.characterDetails.house).toUpperCase()}"
+                    app:layout_constraintEnd_toEndOf="@id/characterNameTv"
+                    app:layout_constraintStart_toStartOf="@id/characterNameTv"
+                    app:layout_constraintTop_toBottomOf="@id/characterActorNameTv" />
+
+                <TextView
+                    android:id="@+id/ancestryTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:visibility="@{String.valueOf(viewModel.characterDetails.ancestry).length() == 0 ? View.GONE : View.VISIBLE}"
+                    android:text='@{"Ancestry: ".concat(String.valueOf(viewModel.characterDetails.ancestry).toUpperCase())}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/characterIv"
+                    app:layout_constraintTop_toBottomOf="@+id/viewSupporter" />
+
+                <TextView
+                    android:id="@+id/speciesTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:visibility="@{String.valueOf(viewModel.characterDetails.species).length() == 0 ? View.GONE : View.VISIBLE}"
+                    android:text='@{"Species: ".concat(String.valueOf(viewModel.characterDetails.species).toUpperCase())}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/characterIv"
+                    app:layout_constraintTop_toBottomOf="@+id/ancestryTv" />
+
+                <TextView
+                    android:id="@+id/genderTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:visibility="@{String.valueOf(viewModel.characterDetails.gender).length() == 0 ? View.GONE : View.VISIBLE}"
+                    android:text='@{"Gender: ".concat(String.valueOf(viewModel.characterDetails.gender).toUpperCase())}'
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/characterIv"
+                    app:layout_constraintTop_toBottomOf="@+id/speciesTv" />
+
+                <TextView
+                    android:id="@+id/dobTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:visibility="@{viewModel.characterDetails.dateOfBirth == null ? View.GONE : View.VISIBLE}"
+                    android:text='@{viewModel.characterDetails.dateOfBirth == null ? "Date of Birth: Not found" : "Date of Birth: ".concat(viewModel.characterDetails.dateOfBirth.toString())}'
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/characterIv"
+                    app:layout_constraintTop_toBottomOf="@+id/genderTv" />
+
+                <TextView
+                    android:id="@+id/wizardTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:text='@{viewModel.characterDetails.wizard ? "Wizard: YES" : "Wizard: NO"}'
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/characterIv"
+                    app:layout_constraintTop_toBottomOf="@+id/dobTv" />
+
+                <TextView
+                    android:id="@+id/eyeColorTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:visibility="@{String.valueOf(viewModel.characterDetails.eyeColour).length() == 0 ? View.GONE : View.VISIBLE}"
+                    android:text='@{"Eye Color: ".concat(String.valueOf(viewModel.characterDetails.eyeColour).toUpperCase())}'
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/characterIv"
+                    app:layout_constraintTop_toBottomOf="@+id/wizardTv" />
+
+                <TextView
+                    android:id="@+id/hairColorTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:visibility="@{String.valueOf(viewModel.characterDetails.hairColour).length() == 0 ? View.GONE : View.VISIBLE}"
+                    android:text='@{"Hair Color: ".concat(String.valueOf(viewModel.characterDetails.hairColour).toUpperCase())}'
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/characterIv"
+                    app:layout_constraintTop_toBottomOf="@+id/eyeColorTv" />
+
+                <TextView
+                    android:id="@+id/patronusTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:visibility="@{String.valueOf(viewModel.characterDetails.patronus).length() == 0 ? View.GONE : View.VISIBLE}"
+                    android:text='@{"Patronus: ".concat(String.valueOf(viewModel.characterDetails.patronus).toUpperCase())}'
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/characterIv"
+                    app:layout_constraintTop_toBottomOf="@+id/hairColorTv" />
+
+                <TextView
+                    android:id="@+id/aliveTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:includeFontPadding="false"
+                    android:text='@{viewModel.characterDetails.alive ? "Alive: YES" : "Alive: NO"}'
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/characterIv"
+                    app:layout_constraintTop_toBottomOf="@+id/patronusTv"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewBackground"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{(viewModel.characterDetails == null &amp;&amp; viewModel.isLoading() == false) ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <include
+                layout="@layout/layout_no_data_found"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/refreshButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:text="@string/refresh"
+                android:backgroundTint="@color/colorAccent"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progressTint="@color/colorAccent"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

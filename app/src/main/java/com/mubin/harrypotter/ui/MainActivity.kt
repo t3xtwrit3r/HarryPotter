@@ -6,12 +6,12 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
-import android.widget.Toast
+import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.mubin.harrypotter.R
 import com.mubin.harrypotter.broadcastReceiver.ConnectionStatus
 import com.mubin.harrypotter.databinding.ActivityMainBinding
+import com.mubin.harrypotter.ui.characterList.CharacterListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")

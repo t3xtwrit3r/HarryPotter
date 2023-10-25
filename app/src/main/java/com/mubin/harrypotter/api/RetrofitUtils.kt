@@ -38,14 +38,14 @@ object RetrofitUtils {
     @Singleton
     fun createOkHttpClient(cache: Cache?): OkHttpClient {
         return OkHttpClient.Builder().apply {
-            if (BuildConfig.DEBUG) {
+            /*if (BuildConfig.DEBUG) {
                 val httpLoggingInterceptor = HttpLoggingInterceptor()
                 val logging =
                     httpLoggingInterceptor.apply {
                         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
                     }
                 addInterceptor(logging)
-            }
+            }*/
             //addInterceptor(NetworkConnectionInterceptor(application))
             //addInterceptor(AuthInterceptor())
             //addNetworkInterceptor(NetworkInterceptor())
